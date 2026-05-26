@@ -207,7 +207,7 @@ summary_text = (
     f"β = {conv_angle:.1f}°\n"
     f"θe = {half_angle:.1f}°\n"
     f"Ae/At = {A_et:.4f}\n"
-    f"Contraction Ratio = {Ac_ratio:.4f}"
+    f"Contraction Ratio = {Ac_ratio:.1f}"
 )
 
 ax.text(
