@@ -21,9 +21,9 @@ dP = 0.2 * p_pa[0] # from the SILLE lecture
 n2o_mm = 44.013 # molar mass of nitrous (g/mol)
 ethanol_mm = 46.07 # molar mass of ethanol (g/mol)
 Cd = 0.65 # discharge coefficient 
-L_star = 1 # SILLE lecture
+L_star = 0.8 # SILLE lecture
 R_bar = 8.314 # universal gas constant (J/(mol*k))
-Ac_ratio = 14 # kinda just vibed. huzel says > 3.5 
+Ac_ratio = 11 # kinda just vibed. huzel says > 3.5 
 Cp = np.array([2.0352, 1.9315, 1.8474]) # chamber,throat,exit, specific heat (kJ/(kg*K))
 rho_fuel = 789 # density of ethanol at room temp (kg/m^3)
 conv_angle = 30 # converging section angle. 30-45, more means more chaotic flow but smaller chamber length. 
@@ -39,11 +39,11 @@ mach_exit = math.sqrt((2 * (p_ratio**(-(gamma[1]-1)/(gamma[1])) - 1)) /  (gamma[
 # Solving for speed of sounds
 sos = math.sqrt(gamma[2] * R_exit * temp[2]) # speed of sound (m/s) using exit conditions
 # Equation 1 for NASA. Used Isp instead, but both values were the same
-v_exit = mach_exit * sos # velocity at exit (m/s) 
+v_exit = mach_exit * sos # velocity at exit (m/s)
 # Mass flow rate calculation. Mass flow has the units of kg/s so that's just F/V
 mdot = thrust/Isp[2] # used isp instead of v_exit because both were the same 
-mdot_ox = mdot * of / (of +1) # mdot for the oxidizer side
-mdot_fuel = mdot / (of +1) # mdot for the fuel side
+mdot_ox = mdot * of / (of +1) # (kg/mdot) mdot for the oxidizer side
+mdot_fuel = mdot / (of +1) # (kg/m^2) mdot for the fuel side
 # Start Area calculations
 A_ox = mdot_ox / (Cd * math.sqrt(2 * rho_ox * dP)) # area of the oxidizer (m^2)
 A_fuel = mdot_fuel / (Cd * math.sqrt(2 * rho_fuel * dP)) # area of the fuel (m^2)
